@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Drawing divs with data</title>
+		<script type="text/javascript" src="../d3.js"></script>
+		<style type="text/css">
+
+		</style>
+	</head>
+	<body>
+
+		<div id="commuting"></div>
+
+		<script type="text/javascript">
+
+
+		d3.csv("inClassSurveyData.csv", function(data){
+
+				drawCommute(data)
+
+		})
+
+		function drawCommute(data){
+			console.log(data)
+
+				var w = 600
+				var h = 400
+				var padding = 20
+				var r = 7
+
+				var svg =d3.select("#commuting")
+						.append("svg")
+						.attr("width",w)
+						.attr("height",h)
+
+				var xScale = d3.scaleLinear()
+				.domain([0,90])
+				.range([padding, w-padding])
+
+				var cScale = d3.scaleLinear()
+				.domain([0,45,90])
+				.range(["Red","Black","Green"])
+
+				var xAxis = d3.axisBottom()
+									.scale(xScale);
+
+
+				svg.selectAll("circle")
+						.data(data)
+						.enter()
+						.append("circle")
+						.attr("cx",function(d,i) {
+								return xScale(d.commute)
+						})
+						.attr("cy",h/2)
+						.attr("r",r)
+						.style("fill",function(d){
+								return cScale(d.commute)
+						})
+						.style("opacity",.5)
+
+
+				svg.append("g")
+						.attr("class", "axis")
+						.attr("transform", "translate(0," + (h - padding) + ")")
+						.call(xAxis);
+
+						}
+
+
+		</script>
+	</body>
+</html>
