@@ -69,7 +69,7 @@
                 var xAxis = d3.axisBottom()
                     .scale(xScale)
                 svg.append("g")
-    				.attr("class", "axis")
+    								.attr("class", "axis")
                     .attr("transform", "translate("+padding+"," + (h) + ")")
                     .call(xAxis);
                 var yScale = d3.scaleLinear().domain([0,90]).range([h,0])
@@ -77,8 +77,8 @@
                     .scale(yScale)
                 svg.append("g")
                     .attr("class", "axis")
-    				.attr("transform", "translate("+padding+",0)")
-    				.call(yAxis);
+    								.attr("transform", "translate("+padding+",0)")
+    								.call(yAxis);
                 svg.selectAll("circle")
                     .data(data)
                     .enter()
@@ -121,7 +121,6 @@
 										 .range([h - padding, padding]);
                     var xScale = d3.scaleBand().domain(["brooklyn","manhattan","bronx","queens","staten_island"]).range([0,w])
 
-
                     d3.selectAll("circle")
                             .data(data)//data
                             .transition()//transition, starting it here
@@ -137,13 +136,8 @@
                                 return xScale(d.borough)+padding*3//still catagorized by borough
                             })
 														.attr("fill", function(d) {
-																return "rgb(0, 0, " + Math.round(d[column]*4) + ")";
+																return "rgb(" + Math.round(d[column]*2) + ", " + Math.round(d[column]*4) + ", " + Math.round(d[column]*6) + ")";
 			   										});
-
-										svg.select(".axis")
-									  		.transition()
-												.duration(1000)
-												.call(yAxis);
 
 
                     d3.selectAll(".label")
@@ -162,6 +156,12 @@
                             .attr("x",function(d,i){
                                 return xScale(d.borough)+padding*3
                             })
+
+								     	 //	svg.select(".axis")
+											//			.transition()
+											//			.duration(1000)
+											//			.call(yAxis)
+
                     }
         //you will notice there is a lot of repetitiveness in the code, we will address that later. For now we write out everything for clarity
 
