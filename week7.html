@@ -116,7 +116,8 @@
                     var w = 300
                     var h = 300
                     var padding = 20
-                    var yScale = d3.scaleLinear().domain([0,90]).range([h,0])
+                    var yScale = d3.scaleLinear() .domain([0, d3.max(dataset, function(d) { return d[1]; })])
+										 .range([h - padding, padding]);
                     var xScale = d3.scaleBand().domain(["brooklyn","manhattan","bronx","queens","staten_island"]).range([0,w])
 
                     d3.selectAll("circle")
