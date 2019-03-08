@@ -72,7 +72,7 @@
     				.attr("class", "axis")
                     .attr("transform", "translate("+padding+"," + (h) + ")")
                     .call(xAxis);
-                var yScale = d3.scaleLinear().domain([0,100]).range([h,0])
+                var yScale = d3.scaleLinear().domain([0,90]).range([h,0])
                 var yAxis = d3.axisLeft()
                     .scale(yScale)
                 svg.append("g")
@@ -136,6 +136,9 @@
 														.attr("fill", function(d) {
 																return "rgb(0, 0, " + Math.round(d[column]*4) + ")";
 			   										});
+
+														xScale.domain([0, d3.max(dataset, function(d) { return d[0]; })]);
+														yScale.domain([0, d3.max(dataset, function(d) { return d[1]; })]);	
 
                     d3.selectAll(".label")
                         		.data(data)
