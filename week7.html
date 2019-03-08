@@ -72,8 +72,10 @@
     				.attr("class", "axis")
                     .attr("transform", "translate("+padding+"," + (h) + ")")
                     .call(xAxis);
-                var yScale = d3.scaleLinear().domain([0,90]).range([h,0])
-                var yAxis = d3.axisLeft()
+                //var yScale = d3.scaleLinear().domain([0,90]).range([h,0])
+								var yScale = d3.scaleLinear() .domain([0, d3.max(data, function(d) { return d[column]; })])
+								 .range([h - padding, padding]);
+								var yAxis = d3.axisLeft()
                     .scale(yScale)
                 svg.append("g")
                     .attr("class", "axis")
@@ -120,9 +122,7 @@
 									  var yScale = d3.scaleLinear() .domain([0, d3.max(data, function(d) { return d[column]; })])
 										 .range([h - padding, padding]);
                     var xScale = d3.scaleBand().domain(["brooklyn","manhattan","bronx","queens","staten_island"]).range([0,w])
-										var yAxis = d3.axisLeft()
-															.scale(yScale)
-
+									
 
                     d3.selectAll("circle")
                             .data(data)//data
