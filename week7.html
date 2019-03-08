@@ -137,8 +137,7 @@
 																return "rgb(0, 0, " + Math.round(d[column]*4) + ")";
 			   										});
 
-														xScale.domain([0, d3.max(dataset, function(d) { return d[0]; })]);
-														yScale.domain([0, d3.max(dataset, function(d) { return d[1]; })]);	
+														yScale.domain([0, d3.max(dataset, function(d) { return d[column]; })]);	
 
                     d3.selectAll(".label")
                         		.data(data)
