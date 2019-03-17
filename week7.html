@@ -65,6 +65,11 @@
                             .attr("width",w+padding*2)
                             .attr("height",h+padding*2)
 
+										//
+										var max = d3.max(data, function(d) { return +d[column];} );
+										var min = d3.min(data, function(d) { return +d[column];} );
+										//
+
                 var xScale = d3.scaleBand().domain(["brooklyn","manhattan","bronx","queens","staten_island"]).range([0,w])
                 var xAxis = d3.axisBottom()
                     .scale(xScale)
@@ -72,7 +77,12 @@
     								.attr("class", "axis")
                     .attr("transform", "translate("+padding+"," + (h) + ")")
                     .call(xAxis);
-                var yScale = d3.scaleLinear().domain([0,90]).range([h,0])
+										//
+								console.log([min,max])
+								var yScale = d3.scaleLinear().domain([0,max*1.2]).range([h,0])
+										//
+
+							  //var yScale = d3.scaleLinear().domain([0,90]).range([h,0])
 								var yAxis = d3.axisLeft()
                     .scale(yScale)
                 svg.append("g")
@@ -120,7 +130,7 @@
 									  //var yScale = d3.scaleLinear() .domain([0, d3.max(data, function(d) { return d[column]; })])
 										//.range([h - padding, padding]);
 										var max = d3.max(data, function(d) { return +d[column];} );
-										var min = d3.min(data, function(d) { return +d[column];} );        
+										var min = d3.min(data, function(d) { return +d[column];} );
 										console.log([min,max])
 										var yScale = d3.scaleLinear().domain([0,max*1.2]).range([h,0])
 										var xScale = d3.scaleBand().domain(["brooklyn","manhattan","bronx","queens","staten_island"]).range([0,w])
