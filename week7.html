@@ -117,9 +117,13 @@
                     var h = 300
                     var padding = 20
                     //var yScale = d3.scaleLinear().domain([0,90]).range([h,0])
-									  var yScale = d3.scaleLinear() .domain([0, d3.max(data, function(d) { return d[column]; })])
-										 .range([h - padding, padding]);
-                    var xScale = d3.scaleBand().domain(["brooklyn","manhattan","bronx","queens","staten_island"]).range([0,w])
+									  //var yScale = d3.scaleLinear() .domain([0, d3.max(data, function(d) { return d[column]; })])
+										//.range([h - padding, padding]);
+										var max = d3.max(data, function(d) { return +d[column];} );
+										var min = d3.min(data, function(d) { return +d[column];} );        
+										console.log([min,max])
+										var yScale = d3.scaleLinear().domain([0,max*1.2]).range([h,0])
+										var xScale = d3.scaleBand().domain(["brooklyn","manhattan","bronx","queens","staten_island"]).range([0,w])
 
                     d3.selectAll("circle")
                             .data(data)//data
